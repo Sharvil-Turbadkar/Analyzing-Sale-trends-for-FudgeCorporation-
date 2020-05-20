@@ -1,0 +1,1064 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/20/2020 1:55:11 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="IST-RL-VH3-02"
+  DTS:CreatorName="AD\schowd12"
+  DTS:DTSID="{2DAC770C-6EBB-4CBD-9D9B-0E5EBB6C61BD}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1301.433"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="StageSales"
+  DTS:PackageType="5"
+  DTS:VersionBuild="13"
+  DTS:VersionGUID="{1C5DED08-D4DA-46C0-9DC7-E5043986C808}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ist-cs-dw1.ad.syr.edu.fudgemart_v3 1]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{703ADE47-0BA3-49F6-AE60-138E0331B75F}"
+      DTS:ObjectName="ist-cs-dw1.ad.syr.edu.fudgemart_v3 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ist-cs-dw1.ad.syr.edu;Initial Catalog=fudgemart_v3;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ist-cs-dw1.ad.syr.edu.ist722_hhkhan_cc2_stage 1]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{9FE28C18-C865-4516-8570-DCE1E4595B6E}"
+      DTS:ObjectName="ist-cs-dw1.ad.syr.edu.ist722_hhkhan_cc2_stage 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ist-cs-dw1.ad.syr.edu;Initial Catalog=ist722_hhkhan_cc2_stage;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DF - Stage stgFudgeMartSales"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{C3B9619D-44D2-49C9-B094-A88D012F1AA7}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DF - Stage stgFudgeMartSales"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DF - Stage stgFudgeMartSales\DST - stgFudgeMartSales"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DST - stgFudgeMartSales"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[stgFudgeMartSales]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF - Stage stgFudgeMartSales\DST - stgFudgeMartSales.Connections[OleDbConnection]"
+                  connectionManagerID="{D70A99FF-D6A3-4DEC-B990-0DBB84640622}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[ist-cs-dw1.ad.syr.edu.ist722_hhkhan_cc2_stage]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DF - Stage stgFudgeMartSales\DST - stgFudgeMartSales.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\DST - stgFudgeMartSales.Inputs[OLE DB Destination Input].Columns[order_id]"
+                      cachedDataType="i4"
+                      cachedName="order_id"
+                      externalMetadataColumnId="Package\DF - Stage stgFudgeMartSales\DST - stgFudgeMartSales.Inputs[OLE DB Destination Input].ExternalColumns[order_id]"
+                      lineageId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Output].Columns[order_id]" />
+                    <inputColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\DST - stgFudgeMartSales.Inputs[OLE DB Destination Input].Columns[product_id]"
+                      cachedDataType="i4"
+                      cachedName="product_id"
+                      externalMetadataColumnId="Package\DF - Stage stgFudgeMartSales\DST - stgFudgeMartSales.Inputs[OLE DB Destination Input].ExternalColumns[product_id]"
+                      lineageId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Output].Columns[product_id]" />
+                    <inputColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\DST - stgFudgeMartSales.Inputs[OLE DB Destination Input].Columns[order_qty]"
+                      cachedDataType="i4"
+                      cachedName="order_qty"
+                      externalMetadataColumnId="Package\DF - Stage stgFudgeMartSales\DST - stgFudgeMartSales.Inputs[OLE DB Destination Input].ExternalColumns[order_qty]"
+                      lineageId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Output].Columns[order_qty]" />
+                    <inputColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\DST - stgFudgeMartSales.Inputs[OLE DB Destination Input].Columns[customer_id]"
+                      cachedDataType="i4"
+                      cachedName="customer_id"
+                      externalMetadataColumnId="Package\DF - Stage stgFudgeMartSales\DST - stgFudgeMartSales.Inputs[OLE DB Destination Input].ExternalColumns[customer_id]"
+                      lineageId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Output].Columns[customer_id]" />
+                    <inputColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\DST - stgFudgeMartSales.Inputs[OLE DB Destination Input].Columns[order_date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="order_date"
+                      externalMetadataColumnId="Package\DF - Stage stgFudgeMartSales\DST - stgFudgeMartSales.Inputs[OLE DB Destination Input].ExternalColumns[order_date]"
+                      lineageId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Output].Columns[order_date]" />
+                    <inputColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\DST - stgFudgeMartSales.Inputs[OLE DB Destination Input].Columns[product_retail_price]"
+                      cachedDataType="cy"
+                      cachedName="product_retail_price"
+                      externalMetadataColumnId="Package\DF - Stage stgFudgeMartSales\DST - stgFudgeMartSales.Inputs[OLE DB Destination Input].ExternalColumns[product_retail_price]"
+                      lineageId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Output].Columns[product_retail_price]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\DST - stgFudgeMartSales.Inputs[OLE DB Destination Input].ExternalColumns[order_id]"
+                      dataType="i4"
+                      name="order_id" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\DST - stgFudgeMartSales.Inputs[OLE DB Destination Input].ExternalColumns[product_id]"
+                      dataType="i4"
+                      name="product_id" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\DST - stgFudgeMartSales.Inputs[OLE DB Destination Input].ExternalColumns[order_qty]"
+                      dataType="i4"
+                      name="order_qty" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\DST - stgFudgeMartSales.Inputs[OLE DB Destination Input].ExternalColumns[customer_id]"
+                      dataType="i4"
+                      name="customer_id" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\DST - stgFudgeMartSales.Inputs[OLE DB Destination Input].ExternalColumns[order_date]"
+                      dataType="dbTimeStamp"
+                      name="order_date" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\DST - stgFudgeMartSales.Inputs[OLE DB Destination Input].ExternalColumns[product_retail_price]"
+                      dataType="cy"
+                      name="product_retail_price" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF - Stage stgFudgeMartSales\DST - stgFudgeMartSales.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DF - Stage stgFudgeMartSales\DST - stgFudgeMartSales.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\DST - stgFudgeMartSales.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF - Stage stgFudgeMartSales\DST - stgFudgeMartSales.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\DST - stgFudgeMartSales.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF - Stage stgFudgeMartSales\DST - stgFudgeMartSales.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="SRC - FudgeMart Orders"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT        fm_order_details.order_id, fm_order_details.product_id, fm_order_details.order_qty, fm_orders.customer_id, fm_orders.order_date, fm_products.product_retail_price
+FROM            fm_order_details INNER JOIN
+                         fm_orders ON fm_order_details.order_id = fm_orders.order_id INNER JOIN
+                         fm_products ON fm_order_details.product_id = fm_products.product_id</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Connections[OleDbConnection]"
+                  connectionManagerID="{73653241-EEA1-46CD-A051-815180499351}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[ist-cs-dw1.ad.syr.edu.fudgemart_v3]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Output].Columns[order_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Output].ExternalColumns[order_id]"
+                      lineageId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Output].Columns[order_id]"
+                      name="order_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Output].Columns[product_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Output].ExternalColumns[product_id]"
+                      lineageId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Output].Columns[product_id]"
+                      name="product_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Output].Columns[order_qty]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Output].ExternalColumns[order_qty]"
+                      lineageId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Output].Columns[order_qty]"
+                      name="order_qty"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Output].Columns[customer_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Output].ExternalColumns[customer_id]"
+                      lineageId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Output].Columns[customer_id]"
+                      name="customer_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Output].Columns[order_date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Output].ExternalColumns[order_date]"
+                      lineageId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Output].Columns[order_date]"
+                      name="order_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Output].Columns[product_retail_price]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Output].ExternalColumns[product_retail_price]"
+                      lineageId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Output].Columns[product_retail_price]"
+                      name="product_retail_price"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Output].ExternalColumns[order_id]"
+                      dataType="i4"
+                      name="order_id" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Output].ExternalColumns[product_id]"
+                      dataType="i4"
+                      name="product_id" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Output].ExternalColumns[order_qty]"
+                      dataType="i4"
+                      name="order_qty" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Output].ExternalColumns[customer_id]"
+                      dataType="i4"
+                      name="customer_id" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Output].ExternalColumns[order_date]"
+                      dataType="dbTimeStamp"
+                      name="order_date" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Output].ExternalColumns[product_retail_price]"
+                      dataType="cy"
+                      name="product_retail_price" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Error Output].Columns[order_id]"
+                      dataType="i4"
+                      lineageId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Error Output].Columns[order_id]"
+                      name="order_id" />
+                    <outputColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Error Output].Columns[product_id]"
+                      dataType="i4"
+                      lineageId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Error Output].Columns[product_id]"
+                      name="product_id" />
+                    <outputColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Error Output].Columns[order_qty]"
+                      dataType="i4"
+                      lineageId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Error Output].Columns[order_qty]"
+                      name="order_qty" />
+                    <outputColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Error Output].Columns[customer_id]"
+                      dataType="i4"
+                      lineageId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Error Output].Columns[customer_id]"
+                      name="customer_id" />
+                    <outputColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Error Output].Columns[order_date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Error Output].Columns[order_date]"
+                      name="order_date" />
+                    <outputColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Error Output].Columns[product_retail_price]"
+                      dataType="cy"
+                      lineageId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Error Output].Columns[product_retail_price]"
+                      name="product_retail_price" />
+                    <outputColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DF - Stage stgFudgeMartSales.Paths[OLE DB Source Output]"
+              endId="Package\DF - Stage stgFudgeMartSales\DST - stgFudgeMartSales.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\DF - StageFudgeFlixSales"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{313661FE-78F6-40DB-8C49-0867E675AD38}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DF - StageFudgeFlixSales"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DF - StageFudgeFlixSales\DST - stgFudgeFlixSales"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DST - stgFudgeFlixSales"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[stgFudgeFlixSales]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF - StageFudgeFlixSales\DST - stgFudgeFlixSales.Connections[OleDbConnection]"
+                  connectionManagerID="{D70A99FF-D6A3-4DEC-B990-0DBB84640622}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[ist-cs-dw1.ad.syr.edu.ist722_hhkhan_cc2_stage]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DF - StageFudgeFlixSales\DST - stgFudgeFlixSales.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DF - StageFudgeFlixSales\DST - stgFudgeFlixSales.Inputs[OLE DB Destination Input].Columns[ab_date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ab_date"
+                      externalMetadataColumnId="Package\DF - StageFudgeFlixSales\DST - stgFudgeFlixSales.Inputs[OLE DB Destination Input].ExternalColumns[ab_date]"
+                      lineageId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Output].Columns[ab_date]" />
+                    <inputColumn
+                      refId="Package\DF - StageFudgeFlixSales\DST - stgFudgeFlixSales.Inputs[OLE DB Destination Input].Columns[ab_billed_amount]"
+                      cachedDataType="cy"
+                      cachedName="ab_billed_amount"
+                      externalMetadataColumnId="Package\DF - StageFudgeFlixSales\DST - stgFudgeFlixSales.Inputs[OLE DB Destination Input].ExternalColumns[ab_billed_amount]"
+                      lineageId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Output].Columns[ab_billed_amount]" />
+                    <inputColumn
+                      refId="Package\DF - StageFudgeFlixSales\DST - stgFudgeFlixSales.Inputs[OLE DB Destination Input].Columns[plan_price]"
+                      cachedDataType="cy"
+                      cachedName="plan_price"
+                      externalMetadataColumnId="Package\DF - StageFudgeFlixSales\DST - stgFudgeFlixSales.Inputs[OLE DB Destination Input].ExternalColumns[plan_price]"
+                      lineageId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Output].Columns[plan_price]" />
+                    <inputColumn
+                      refId="Package\DF - StageFudgeFlixSales\DST - stgFudgeFlixSales.Inputs[OLE DB Destination Input].Columns[ab_id]"
+                      cachedDataType="i4"
+                      cachedName="ab_id"
+                      externalMetadataColumnId="Package\DF - StageFudgeFlixSales\DST - stgFudgeFlixSales.Inputs[OLE DB Destination Input].ExternalColumns[ab_id]"
+                      lineageId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Output].Columns[ab_id]" />
+                    <inputColumn
+                      refId="Package\DF - StageFudgeFlixSales\DST - stgFudgeFlixSales.Inputs[OLE DB Destination Input].Columns[ab_plan_id]"
+                      cachedDataType="i4"
+                      cachedName="ab_plan_id"
+                      externalMetadataColumnId="Package\DF - StageFudgeFlixSales\DST - stgFudgeFlixSales.Inputs[OLE DB Destination Input].ExternalColumns[ab_plan_id]"
+                      lineageId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Output].Columns[ab_plan_id]" />
+                    <inputColumn
+                      refId="Package\DF - StageFudgeFlixSales\DST - stgFudgeFlixSales.Inputs[OLE DB Destination Input].Columns[ab_account_id]"
+                      cachedDataType="i4"
+                      cachedName="ab_account_id"
+                      externalMetadataColumnId="Package\DF - StageFudgeFlixSales\DST - stgFudgeFlixSales.Inputs[OLE DB Destination Input].ExternalColumns[ab_account_id]"
+                      lineageId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Output].Columns[ab_account_id]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF - StageFudgeFlixSales\DST - stgFudgeFlixSales.Inputs[OLE DB Destination Input].ExternalColumns[ab_date]"
+                      dataType="dbTimeStamp"
+                      name="ab_date" />
+                    <externalMetadataColumn
+                      refId="Package\DF - StageFudgeFlixSales\DST - stgFudgeFlixSales.Inputs[OLE DB Destination Input].ExternalColumns[ab_billed_amount]"
+                      dataType="cy"
+                      name="ab_billed_amount" />
+                    <externalMetadataColumn
+                      refId="Package\DF - StageFudgeFlixSales\DST - stgFudgeFlixSales.Inputs[OLE DB Destination Input].ExternalColumns[plan_price]"
+                      dataType="cy"
+                      name="plan_price" />
+                    <externalMetadataColumn
+                      refId="Package\DF - StageFudgeFlixSales\DST - stgFudgeFlixSales.Inputs[OLE DB Destination Input].ExternalColumns[ab_id]"
+                      dataType="i4"
+                      name="ab_id" />
+                    <externalMetadataColumn
+                      refId="Package\DF - StageFudgeFlixSales\DST - stgFudgeFlixSales.Inputs[OLE DB Destination Input].ExternalColumns[ab_plan_id]"
+                      dataType="i4"
+                      name="ab_plan_id" />
+                    <externalMetadataColumn
+                      refId="Package\DF - StageFudgeFlixSales\DST - stgFudgeFlixSales.Inputs[OLE DB Destination Input].ExternalColumns[ab_account_id]"
+                      dataType="i4"
+                      name="ab_account_id" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF - StageFudgeFlixSales\DST - stgFudgeFlixSales.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DF - StageFudgeFlixSales\DST - stgFudgeFlixSales.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF - StageFudgeFlixSales\DST - stgFudgeFlixSales.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF - StageFudgeFlixSales\DST - stgFudgeFlixSales.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF - StageFudgeFlixSales\DST - stgFudgeFlixSales.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF - StageFudgeFlixSales\DST - stgFudgeFlixSales.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="SRC - FudgeFlix AccountBilling"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT        ff_account_billing.ab_id, ff_account_billing.ab_date, ff_account_billing.ab_account_id, ff_account_billing.ab_plan_id, ff_account_billing.ab_billed_amount, ff_plans.plan_price
+FROM            ff_account_billing INNER JOIN
+                         ff_plans ON ff_account_billing.ab_plan_id = ff_plans.plan_id</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Connections[OleDbConnection]"
+                  connectionManagerID="{B1A07B07-436D-4914-A6CD-5BA1A3FEF419}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[ist-cs-dw1.ad.syr.edu.fudgeflix_v3]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Output].Columns[ab_date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Output].ExternalColumns[ab_date]"
+                      lineageId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Output].Columns[ab_date]"
+                      name="ab_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Output].Columns[ab_billed_amount]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Output].ExternalColumns[ab_billed_amount]"
+                      lineageId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Output].Columns[ab_billed_amount]"
+                      name="ab_billed_amount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Output].Columns[plan_price]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Output].ExternalColumns[plan_price]"
+                      lineageId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Output].Columns[plan_price]"
+                      name="plan_price"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Output].Columns[ab_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Output].ExternalColumns[ab_id]"
+                      lineageId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Output].Columns[ab_id]"
+                      name="ab_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Output].Columns[ab_plan_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Output].ExternalColumns[ab_plan_id]"
+                      lineageId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Output].Columns[ab_plan_id]"
+                      name="ab_plan_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Output].Columns[ab_account_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Output].ExternalColumns[ab_account_id]"
+                      lineageId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Output].Columns[ab_account_id]"
+                      name="ab_account_id"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Output].ExternalColumns[ab_date]"
+                      dataType="dbTimeStamp"
+                      name="ab_date" />
+                    <externalMetadataColumn
+                      refId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Output].ExternalColumns[ab_billed_amount]"
+                      dataType="cy"
+                      name="ab_billed_amount" />
+                    <externalMetadataColumn
+                      refId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Output].ExternalColumns[plan_price]"
+                      dataType="cy"
+                      name="plan_price" />
+                    <externalMetadataColumn
+                      refId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Output].ExternalColumns[ab_id]"
+                      dataType="i4"
+                      name="ab_id" />
+                    <externalMetadataColumn
+                      refId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Output].ExternalColumns[ab_plan_id]"
+                      dataType="i4"
+                      name="ab_plan_id" />
+                    <externalMetadataColumn
+                      refId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Output].ExternalColumns[ab_account_id]"
+                      dataType="i4"
+                      name="ab_account_id" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Error Output].Columns[ab_date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Error Output].Columns[ab_date]"
+                      name="ab_date" />
+                    <outputColumn
+                      refId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Error Output].Columns[ab_billed_amount]"
+                      dataType="cy"
+                      lineageId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Error Output].Columns[ab_billed_amount]"
+                      name="ab_billed_amount" />
+                    <outputColumn
+                      refId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Error Output].Columns[plan_price]"
+                      dataType="cy"
+                      lineageId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Error Output].Columns[plan_price]"
+                      name="plan_price" />
+                    <outputColumn
+                      refId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Error Output].Columns[ab_id]"
+                      dataType="i4"
+                      lineageId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Error Output].Columns[ab_id]"
+                      name="ab_id" />
+                    <outputColumn
+                      refId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Error Output].Columns[ab_plan_id]"
+                      dataType="i4"
+                      lineageId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Error Output].Columns[ab_plan_id]"
+                      name="ab_plan_id" />
+                    <outputColumn
+                      refId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Error Output].Columns[ab_account_id]"
+                      dataType="i4"
+                      lineageId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Error Output].Columns[ab_account_id]"
+                      name="ab_account_id" />
+                    <outputColumn
+                      refId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DF - StageFudgeFlixSales.Paths[OLE DB Source Output]"
+              endId="Package\DF - StageFudgeFlixSales\DST - stgFudgeFlixSales.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL - Truncate Stage Tables"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{9C91F49D-07CF-4982-8883-EC59CF5A8898}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL - Truncate Stage Tables"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{D70A99FF-D6A3-4DEC-B990-0DBB84640622}"
+          SQLTask:SqlStatementSource="truncate table stgFudgeMartSales;&#xA;truncate table stgFudgeFlixSales;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{7DFE8D11-6B3F-4F0A-8B88-032191DB3B37}"
+      DTS:From="Package\SQL - Truncate Stage Tables"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\DF - Stage stgFudgeMartSales" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{A84442ED-3A2B-452A-B809-87EA6032FF19}"
+      DTS:From="Package\SQL - Truncate Stage Tables"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\DF - StageFudgeFlixSales" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="223,48"
+          Id="Package\DF - Stage stgFudgeMartSales"
+          TopLeft="78,123" />
+        <NodeLayout
+          Size="203,47"
+          Id="Package\DF - StageFudgeFlixSales"
+          TopLeft="371,117" />
+        <NodeLayout
+          Size="214,42"
+          Id="Package\SQL - Truncate Stage Tables"
+          TopLeft="226,16" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="298.666666666667,58">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-109.166666666667,65"
+              Start="0,0"
+              End="-109.166666666667,57.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.2894248608534" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.2894248608534"
+                    Point2="0,26.2894248608534"
+                    Point3="-4,26.2894248608534" />
+                  <mssgle:LineSegment
+                    End="-105.166666666667,26.2894248608534" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-105.166666666667,26.2894248608534"
+                    Point2="-109.166666666667,26.2894248608534"
+                    Point3="-109.166666666667,30.2894248608534" />
+                  <mssgle:LineSegment
+                    End="-109.166666666667,57.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="367.333333333333,58">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="105.166666666667,59"
+              Start="0,0"
+              End="105.166666666667,51.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.8627087198516" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.8627087198516"
+                    Point2="0,23.8627087198516"
+                    Point3="4,23.8627087198516" />
+                  <mssgle:LineSegment
+                    End="101.166666666667,23.8627087198516" />
+                  <mssgle:CubicBezierSegment
+                    Point1="101.166666666667,23.8627087198516"
+                    Point2="105.166666666667,23.8627087198516"
+                    Point3="105.166666666667,27.8627087198516" />
+                  <mssgle:LineSegment
+                    End="105.166666666667,51.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DF - Stage stgFudgeMartSales">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="200,48"
+          Id="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders"
+          TopLeft="202,16" />
+        <NodeLayout
+          Size="203,47"
+          Id="Package\DF - Stage stgFudgeMartSales\DST - stgFudgeMartSales"
+          TopLeft="194,125" />
+        <EdgeLayout
+          Id="Package\DF - Stage stgFudgeMartSales.Paths[OLE DB Source Output]"
+          TopLeft="298.75,64">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,61"
+              Start="0,0"
+              End="0,53.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,53.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DF - Stage stgFudgeMartSales\DST - stgFudgeMartSales">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DF - Stage stgFudgeMartSales\SRC - FudgeMart Orders">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\DF - StageFudgeFlixSales">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="222,42"
+          Id="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling"
+          TopLeft="293,37" />
+        <NodeLayout
+          Size="205,54"
+          Id="Package\DF - StageFudgeFlixSales\DST - stgFudgeFlixSales"
+          TopLeft="306,116" />
+        <EdgeLayout
+          Id="Package\DF - StageFudgeFlixSales.Paths[OLE DB Source Output]"
+          TopLeft="406.25,79">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37"
+              Start="0,0"
+              End="0,29.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DF - StageFudgeFlixSales\DST - stgFudgeFlixSales">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DF - StageFudgeFlixSales\SRC - FudgeFlix AccountBilling">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

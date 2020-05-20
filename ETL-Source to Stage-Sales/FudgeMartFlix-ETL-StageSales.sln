@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.960
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "FudgeMartFlix-ETL-StageSales", "FudgeMartFlix-ETL-StageSales\FudgeMartFlix-ETL-StageSales.dtproj", "{01F61917-E6FC-4D1D-88DA-B587AF29471A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{01F61917-E6FC-4D1D-88DA-B587AF29471A}.Development|Default.ActiveCfg = Development
+		{01F61917-E6FC-4D1D-88DA-B587AF29471A}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1471CD03-61BB-400E-94AE-8A9B15DFE080}
+	EndGlobalSection
+EndGlobal

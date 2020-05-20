@@ -1,0 +1,1983 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/21/2020 1:24:55 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="IST-RL-VH2-04"
+  DTS:CreatorName="AD\svturbad"
+  DTS:DTSID="{3A0B2F13-F30C-491E-8539-7F9A1E65872F}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1301.433"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="FactSales-FudgeMart"
+  DTS:PackageType="5"
+  DTS:VersionBuild="12"
+  DTS:VersionGUID="{3CFF1EC4-8962-4972-93BF-9B6430AF8823}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ist-cs-dw1.ad.syr.edu]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{B8228BFF-0715-4244-B7A0-4BB227916EED}"
+      DTS:ObjectName="ist-cs-dw1.ad.syr.edu">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ist-cs-dw1.ad.syr.edu;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Mart-FactSales Loading"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{88786651-09E8-40E6-A91F-8BF2BC6EF17B}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Mart-FactSales Loading"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Mart-FactSales Loading\DC-sourcetype,Facts"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="DC-sourcetype,Facts"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Mart-FactSales Loading\DC-sourcetype,Facts.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Mart-FactSales Loading\DC-sourcetype,Facts.Inputs[Derived Column Input].Columns[order_qty]"
+                      cachedDataType="i4"
+                      cachedName="order_qty"
+                      lineageId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].Columns[order_qty]" />
+                    <inputColumn
+                      refId="Package\Mart-FactSales Loading\DC-sourcetype,Facts.Inputs[Derived Column Input].Columns[product_retail_price]"
+                      cachedDataType="cy"
+                      cachedName="product_retail_price"
+                      lineageId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].Columns[product_retail_price]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Mart-FactSales Loading\DC-sourcetype,Facts.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Mart-FactSales Loading\DC-sourcetype,Facts.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Mart-FactSales Loading\DC-sourcetype,Facts.Outputs[Derived Column Output].Columns[sourcetype]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="9"
+                      lineageId="Package\Mart-FactSales Loading\DC-sourcetype,Facts.Outputs[Derived Column Output].Columns[sourcetype]"
+                      name="sourcetype"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"fudgemart"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"fudgemart"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Mart-FactSales Loading\DC-sourcetype,Facts.Outputs[Derived Column Output].Columns[Extended_Price]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Mart-FactSales Loading\DC-sourcetype,Facts.Outputs[Derived Column Output].Columns[Extended_Price]"
+                      name="Extended_Price"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_CY)#{Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].Columns[order_qty]} * #{Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].Columns[product_retail_price]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_CY)order_qty * product_retail_price</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Mart-FactSales Loading\DC-sourcetype,Facts.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Mart-FactSales Loading\DC-sourcetype,Facts.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Mart-FactSales Loading\DC-sourcetype,Facts.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Mart-FactSales Loading\DC-sourcetype,Facts.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Mart-FactSales Loading\DC-sourcetype,Facts.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Mart-FactSales Loading\DC-sourcetype,Facts.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Mart-FactSales Loading\Insert Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insert Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[fudgemartg2].[FactSales]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Mart-FactSales Loading\Insert Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{4B92BB3A-BDDC-4036-B4CE-A93425511B88}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[ist-cs-dw1.ad.syr.edu.ist722_hhkhan_cc2_dw]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Mart-FactSales Loading\Insert Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Mart-FactSales Loading\Insert Destination.Inputs[OLE DB Destination Input].Columns[ProductKey]"
+                      cachedDataType="i4"
+                      cachedName="ProductKey"
+                      externalMetadataColumnId="Package\Mart-FactSales Loading\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                      lineageId="Package\Mart-FactSales Loading\LUP-Lookup ProductKey from ProductID.Outputs[Lookup Match Output].Columns[ProductKey]" />
+                    <inputColumn
+                      refId="Package\Mart-FactSales Loading\Insert Destination.Inputs[OLE DB Destination Input].Columns[CustomerKey]"
+                      cachedDataType="i4"
+                      cachedName="CustomerKey"
+                      externalMetadataColumnId="Package\Mart-FactSales Loading\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerKey]"
+                      lineageId="Package\Mart-FactSales Loading\Lookup CustomerKey from CustomerID.Outputs[Lookup Match Output].Columns[CustomerKey]" />
+                    <inputColumn
+                      refId="Package\Mart-FactSales Loading\Insert Destination.Inputs[OLE DB Destination Input].Columns[DateKey]"
+                      cachedDataType="i4"
+                      cachedName="DateKey"
+                      externalMetadataColumnId="Package\Mart-FactSales Loading\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[OrderDateKey]"
+                      lineageId="Package\Mart-FactSales Loading\LUP-Lookup DateKey from OrderDate.Outputs[Lookup Match Output].Columns[DateKey]" />
+                    <inputColumn
+                      refId="Package\Mart-FactSales Loading\Insert Destination.Inputs[OLE DB Destination Input].Columns[order_id]"
+                      cachedDataType="i4"
+                      cachedName="order_id"
+                      externalMetadataColumnId="Package\Mart-FactSales Loading\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[OrderID]"
+                      lineageId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].Columns[order_id]" />
+                    <inputColumn
+                      refId="Package\Mart-FactSales Loading\Insert Destination.Inputs[OLE DB Destination Input].Columns[order_qty]"
+                      cachedDataType="i4"
+                      cachedName="order_qty"
+                      externalMetadataColumnId="Package\Mart-FactSales Loading\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[Quantity]"
+                      lineageId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].Columns[order_qty]" />
+                    <inputColumn
+                      refId="Package\Mart-FactSales Loading\Insert Destination.Inputs[OLE DB Destination Input].Columns[Extended_Price]"
+                      cachedDataType="cy"
+                      cachedName="Extended_Price"
+                      externalMetadataColumnId="Package\Mart-FactSales Loading\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[ExtendedPriceAmount]"
+                      lineageId="Package\Mart-FactSales Loading\DC-sourcetype,Facts.Outputs[Derived Column Output].Columns[Extended_Price]" />
+                    <inputColumn
+                      refId="Package\Mart-FactSales Loading\Insert Destination.Inputs[OLE DB Destination Input].Columns[product_retail_price]"
+                      cachedDataType="cy"
+                      cachedName="product_retail_price"
+                      externalMetadataColumnId="Package\Mart-FactSales Loading\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[UnitPrice]"
+                      lineageId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].Columns[product_retail_price]" />
+                    <inputColumn
+                      refId="Package\Mart-FactSales Loading\Insert Destination.Inputs[OLE DB Destination Input].Columns[sourcetype]"
+                      cachedDataType="wstr"
+                      cachedLength="9"
+                      cachedName="sourcetype"
+                      externalMetadataColumnId="Package\Mart-FactSales Loading\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[SourceType]"
+                      lineageId="Package\Mart-FactSales Loading\DC-sourcetype,Facts.Outputs[Derived Column Output].Columns[sourcetype]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Mart-FactSales Loading\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                      dataType="i4"
+                      name="ProductKey" />
+                    <externalMetadataColumn
+                      refId="Package\Mart-FactSales Loading\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerKey]"
+                      dataType="i4"
+                      name="CustomerKey" />
+                    <externalMetadataColumn
+                      refId="Package\Mart-FactSales Loading\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[OrderDateKey]"
+                      dataType="i4"
+                      name="OrderDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Mart-FactSales Loading\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[OrderID]"
+                      dataType="i4"
+                      name="OrderID" />
+                    <externalMetadataColumn
+                      refId="Package\Mart-FactSales Loading\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[Quantity]"
+                      dataType="i4"
+                      name="Quantity" />
+                    <externalMetadataColumn
+                      refId="Package\Mart-FactSales Loading\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[ExtendedPriceAmount]"
+                      dataType="cy"
+                      name="ExtendedPriceAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Mart-FactSales Loading\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[UnitPrice]"
+                      dataType="cy"
+                      name="UnitPrice" />
+                    <externalMetadataColumn
+                      refId="Package\Mart-FactSales Loading\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[SourceType]"
+                      dataType="wstr"
+                      length="10"
+                      name="SourceType" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Mart-FactSales Loading\Insert Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Mart-FactSales Loading\Insert Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Mart-FactSales Loading\Insert Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Mart-FactSales Loading\Insert Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Mart-FactSales Loading\Insert Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Mart-FactSales Loading\Insert Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Mart-FactSales Loading\Lookup CustomerKey from CustomerID"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup CustomerKey from CustomerID"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [fudgemartg2].[DimCustomer]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [fudgemartg2].[DimCustomer]) [refTable]
+where [refTable].[CustomerID] = ? and [refTable].[SourceType] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="CustomerKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CustomerID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CustomerName" dataType="DT_WSTR" length="101" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CustomerCity" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="CustomerState" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="CustomerZip" dataType="DT_STR" length="20" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="CustomerEmail" dataType="DT_STR" length="200" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="SourceType" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="RowIsCurrent" dataType="DT_BOOL" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="RowStartDate" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="RowEndDate" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="RowChangeReason" dataType="DT_WSTR" length="200" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].Columns[customer_id]};#{Package\Mart-FactSales Loading\DC-sourcetype,Facts.Outputs[Derived Column Output].Columns[sourcetype]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Mart-FactSales Loading\Lookup CustomerKey from CustomerID.Connections[OleDbConnection]"
+                  connectionManagerID="{4B92BB3A-BDDC-4036-B4CE-A93425511B88}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[ist-cs-dw1.ad.syr.edu.ist722_hhkhan_cc2_dw]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Mart-FactSales Loading\Lookup CustomerKey from CustomerID.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Mart-FactSales Loading\Lookup CustomerKey from CustomerID.Inputs[Lookup Input].Columns[customer_id]"
+                      cachedDataType="i4"
+                      cachedName="customer_id"
+                      lineageId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].Columns[customer_id]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">CustomerID</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Mart-FactSales Loading\Lookup CustomerKey from CustomerID.Inputs[Lookup Input].Columns[sourcetype]"
+                      cachedDataType="wstr"
+                      cachedLength="9"
+                      cachedName="sourcetype"
+                      lineageId="Package\Mart-FactSales Loading\DC-sourcetype,Facts.Outputs[Derived Column Output].Columns[sourcetype]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">SourceType</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Mart-FactSales Loading\Lookup CustomerKey from CustomerID.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Mart-FactSales Loading\Lookup CustomerKey from CustomerID.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Mart-FactSales Loading\Lookup CustomerKey from CustomerID.Outputs[Lookup Match Output].Columns[CustomerKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Mart-FactSales Loading\Lookup CustomerKey from CustomerID.Outputs[Lookup Match Output].Columns[CustomerKey]"
+                      name="CustomerKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CustomerKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Mart-FactSales Loading\Lookup CustomerKey from CustomerID.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Mart-FactSales Loading\Lookup CustomerKey from CustomerID.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Mart-FactSales Loading\Lookup CustomerKey from CustomerID.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Mart-FactSales Loading\Lookup CustomerKey from CustomerID.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Mart-FactSales Loading\Lookup CustomerKey from CustomerID.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Mart-FactSales Loading\Lookup CustomerKey from CustomerID.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Mart-FactSales Loading\Lookup CustomerKey from CustomerID.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Mart-FactSales Loading\Lookup CustomerKey from CustomerID.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Mart-FactSales Loading\LUP-Lookup DateKey from OrderDate"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="LUP-Lookup DateKey from OrderDate"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [fudgemartg2].[DimDate]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [fudgemartg2].[DimDate]) [refTable]
+where [refTable].[Date] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="DateKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Date" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="FullDateUSA" dataType="DT_WSTR" length="11" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DayOfWeek" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DayName" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DayOfMonth" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DayOfYear" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="WeekOfYear" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="MonthName" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="MonthOfYear" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Quarter" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="QuarterName" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Year" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="IsWeekday" dataType="DT_STR" length="1" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].Columns[order_date]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Mart-FactSales Loading\LUP-Lookup DateKey from OrderDate.Connections[OleDbConnection]"
+                  connectionManagerID="{4B92BB3A-BDDC-4036-B4CE-A93425511B88}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[ist-cs-dw1.ad.syr.edu.ist722_hhkhan_cc2_dw]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Mart-FactSales Loading\LUP-Lookup DateKey from OrderDate.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Mart-FactSales Loading\LUP-Lookup DateKey from OrderDate.Inputs[Lookup Input].Columns[order_date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="order_date"
+                      lineageId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].Columns[order_date]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">Date</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Mart-FactSales Loading\LUP-Lookup DateKey from OrderDate.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Mart-FactSales Loading\LUP-Lookup DateKey from OrderDate.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Mart-FactSales Loading\LUP-Lookup DateKey from OrderDate.Outputs[Lookup Match Output].Columns[DateKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Mart-FactSales Loading\LUP-Lookup DateKey from OrderDate.Outputs[Lookup Match Output].Columns[DateKey]"
+                      name="DateKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">DateKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Mart-FactSales Loading\LUP-Lookup DateKey from OrderDate.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Mart-FactSales Loading\LUP-Lookup DateKey from OrderDate.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Mart-FactSales Loading\LUP-Lookup DateKey from OrderDate.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Mart-FactSales Loading\LUP-Lookup DateKey from OrderDate.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Mart-FactSales Loading\LUP-Lookup DateKey from OrderDate.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Mart-FactSales Loading\LUP-Lookup DateKey from OrderDate.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Mart-FactSales Loading\LUP-Lookup DateKey from OrderDate.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Mart-FactSales Loading\LUP-Lookup DateKey from OrderDate.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Mart-FactSales Loading\LUP-Lookup ProductKey from ProductID"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="LUP-Lookup ProductKey from ProductID"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [fudgemartg2].[DimProduct]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [fudgemartg2].[DimProduct]) [refTable]
+where [refTable].[ProductID] = ? and [refTable].[SourceType] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="ProductKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProductID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProductName" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="IsActive" dataType="DT_WSTR" length="1" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="SupplierName" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="CategoryName" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="SourceType" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="RowIsCurrent" dataType="DT_BOOL" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="RowStartDate" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="RowEndDate" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="RowChangeReason" dataType="DT_WSTR" length="200" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].Columns[product_id]};#{Package\Mart-FactSales Loading\DC-sourcetype,Facts.Outputs[Derived Column Output].Columns[sourcetype]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Mart-FactSales Loading\LUP-Lookup ProductKey from ProductID.Connections[OleDbConnection]"
+                  connectionManagerID="{4B92BB3A-BDDC-4036-B4CE-A93425511B88}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[ist-cs-dw1.ad.syr.edu.ist722_hhkhan_cc2_dw]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Mart-FactSales Loading\LUP-Lookup ProductKey from ProductID.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Mart-FactSales Loading\LUP-Lookup ProductKey from ProductID.Inputs[Lookup Input].Columns[product_id]"
+                      cachedDataType="i4"
+                      cachedName="product_id"
+                      lineageId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].Columns[product_id]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">ProductID</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Mart-FactSales Loading\LUP-Lookup ProductKey from ProductID.Inputs[Lookup Input].Columns[sourcetype]"
+                      cachedDataType="wstr"
+                      cachedLength="9"
+                      cachedName="sourcetype"
+                      lineageId="Package\Mart-FactSales Loading\DC-sourcetype,Facts.Outputs[Derived Column Output].Columns[sourcetype]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">SourceType</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Mart-FactSales Loading\LUP-Lookup ProductKey from ProductID.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Mart-FactSales Loading\LUP-Lookup ProductKey from ProductID.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Mart-FactSales Loading\LUP-Lookup ProductKey from ProductID.Outputs[Lookup Match Output].Columns[ProductKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Mart-FactSales Loading\LUP-Lookup ProductKey from ProductID.Outputs[Lookup Match Output].Columns[ProductKey]"
+                      name="ProductKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">ProductKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Mart-FactSales Loading\LUP-Lookup ProductKey from ProductID.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Mart-FactSales Loading\LUP-Lookup ProductKey from ProductID.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Mart-FactSales Loading\LUP-Lookup ProductKey from ProductID.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Mart-FactSales Loading\LUP-Lookup ProductKey from ProductID.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Mart-FactSales Loading\LUP-Lookup ProductKey from ProductID.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Mart-FactSales Loading\LUP-Lookup ProductKey from ProductID.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Mart-FactSales Loading\LUP-Lookup ProductKey from ProductID.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Mart-FactSales Loading\LUP-Lookup ProductKey from ProductID.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Mart-FactSales Loading\OLE DB Command"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="OLE DB Command"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">UPDATE [fudgemartg2].[FactSales] SET [ExtendedPriceAmount] = ?,[Quantity] = ?,[UnitPrice] = ? WHERE [CustomerKey] = ? AND [OrderDateKey] = ? AND [ProductKey] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Mart-FactSales Loading\OLE DB Command.Connections[OleDbConnection]"
+                  connectionManagerID="{4B92BB3A-BDDC-4036-B4CE-A93425511B88}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[ist-cs-dw1.ad.syr.edu.ist722_hhkhan_cc2_dw]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Mart-FactSales Loading\OLE DB Command.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Mart-FactSales Loading\OLE DB Command.Inputs[OLE DB Command Input].Columns[CustomerKey]"
+                      cachedDataType="i4"
+                      cachedName="CustomerKey"
+                      externalMetadataColumnId="Package\Mart-FactSales Loading\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      lineageId="Package\Mart-FactSales Loading\Lookup CustomerKey from CustomerID.Outputs[Lookup Match Output].Columns[CustomerKey]" />
+                    <inputColumn
+                      refId="Package\Mart-FactSales Loading\OLE DB Command.Inputs[OLE DB Command Input].Columns[Extended_Price]"
+                      cachedDataType="cy"
+                      cachedName="Extended_Price"
+                      externalMetadataColumnId="Package\Mart-FactSales Loading\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\Mart-FactSales Loading\DC-sourcetype,Facts.Outputs[Derived Column Output].Columns[Extended_Price]" />
+                    <inputColumn
+                      refId="Package\Mart-FactSales Loading\OLE DB Command.Inputs[OLE DB Command Input].Columns[DateKey]"
+                      cachedDataType="i4"
+                      cachedName="DateKey"
+                      externalMetadataColumnId="Package\Mart-FactSales Loading\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      lineageId="Package\Mart-FactSales Loading\LUP-Lookup DateKey from OrderDate.Outputs[Lookup Match Output].Columns[DateKey]" />
+                    <inputColumn
+                      refId="Package\Mart-FactSales Loading\OLE DB Command.Inputs[OLE DB Command Input].Columns[ProductKey]"
+                      cachedDataType="i4"
+                      cachedName="ProductKey"
+                      externalMetadataColumnId="Package\Mart-FactSales Loading\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_5]"
+                      lineageId="Package\Mart-FactSales Loading\LUP-Lookup ProductKey from ProductID.Outputs[Lookup Match Output].Columns[ProductKey]" />
+                    <inputColumn
+                      refId="Package\Mart-FactSales Loading\OLE DB Command.Inputs[OLE DB Command Input].Columns[order_qty]"
+                      cachedDataType="i4"
+                      cachedName="order_qty"
+                      externalMetadataColumnId="Package\Mart-FactSales Loading\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      lineageId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].Columns[order_qty]" />
+                    <inputColumn
+                      refId="Package\Mart-FactSales Loading\OLE DB Command.Inputs[OLE DB Command Input].Columns[product_retail_price]"
+                      cachedDataType="cy"
+                      cachedName="product_retail_price"
+                      externalMetadataColumnId="Package\Mart-FactSales Loading\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      lineageId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].Columns[product_retail_price]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Mart-FactSales Loading\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      dataType="cy"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Mart-FactSales Loading\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      dataType="i4"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Mart-FactSales Loading\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      dataType="cy"
+                      name="Param_2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Mart-FactSales Loading\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      dataType="i4"
+                      name="Param_3">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Mart-FactSales Loading\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      dataType="i4"
+                      name="Param_4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Mart-FactSales Loading\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_5]"
+                      dataType="i4"
+                      name="Param_5">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Mart-FactSales Loading\OLE DB Command.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\Mart-FactSales Loading\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Mart-FactSales Loading\OLE DB Command.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\Mart-FactSales Loading\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Mart-FactSales Loading\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Mart-FactSales Loading\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Mart-FactSales Loading\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Mart-FactSales Loading\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales"
+              componentClassID="Microsoft.SCD"
+              contactInfo="Slowly Changing Dimension;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;3"
+              description="Updates a SQL Server Analysis Services data warehouse dimension. Update dimension records that are already present and  insert dimension records that aren't. For example, update the DimProduct table of the AdventureWorksDW OLAP database with data from the Products table in the AdventureWorks OLTP database."
+              name="SCD-Smart Update Fact Sales"
+              version="3">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SELECT statement used to create a schema rowset."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT [CustomerKey], [ExtendedPriceAmount], [OrderDateKey], [OrderID], [ProductKey], [Quantity], [SourceType], [UnitPrice] FROM [fudgemartg2].[FactSales]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the WHERE clause in the SELECT statement that selects the current row among rows with identical business keys."
+                  name="CurrentRowWhere"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether historical attribute updates are directed to the transformation output for changing attribute updates."
+                  name="UpdateChangingAttributeHistory">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the transformation fails when columns with fixed attributes contain changes."
+                  name="FailOnFixedAttributeChange">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the column name for the inferred member."
+                  name="InferredMemberIndicator"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether inferred member updates are detected."
+                  name="EnableInferredMember">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the transformation fails when a lookup of an existing record fails."
+                  name="FailOnLookupFailure">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies that all rows in the input are new or the transformation detects the change type."
+                  name="IncomingRowChangeType"
+                  typeConverter="IncomingRowChangeType">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Connections[LookupConnection]"
+                  connectionManagerID="{4B92BB3A-BDDC-4036-B4CE-A93425511B88}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[ist-cs-dw1.ad.syr.edu.ist722_hhkhan_cc2_dw]"
+                  description="Defines the connection to use for lookups in the dimension table"
+                  name="LookupConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Inputs[Slowly Changing Dimension Input]"
+                  name="Slowly Changing Dimension Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Inputs[Slowly Changing Dimension Input].Columns[CustomerKey]"
+                      cachedDataType="i4"
+                      cachedName="CustomerKey"
+                      externalMetadataColumnId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Inputs[Slowly Changing Dimension Input].ExternalColumns[CustomerKey]"
+                      lineageId="Package\Mart-FactSales Loading\Lookup CustomerKey from CustomerID.Outputs[Lookup Match Output].Columns[CustomerKey]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Inputs[Slowly Changing Dimension Input].Columns[Extended_Price]"
+                      cachedDataType="cy"
+                      cachedName="Extended_Price"
+                      externalMetadataColumnId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Inputs[Slowly Changing Dimension Input].ExternalColumns[ExtendedPriceAmount]"
+                      lineageId="Package\Mart-FactSales Loading\DC-sourcetype,Facts.Outputs[Derived Column Output].Columns[Extended_Price]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Inputs[Slowly Changing Dimension Input].Columns[DateKey]"
+                      cachedDataType="i4"
+                      cachedName="DateKey"
+                      externalMetadataColumnId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Inputs[Slowly Changing Dimension Input].ExternalColumns[OrderDateKey]"
+                      lineageId="Package\Mart-FactSales Loading\LUP-Lookup DateKey from OrderDate.Outputs[Lookup Match Output].Columns[DateKey]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Inputs[Slowly Changing Dimension Input].Columns[order_id]"
+                      cachedDataType="i4"
+                      cachedName="order_id"
+                      externalMetadataColumnId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Inputs[Slowly Changing Dimension Input].ExternalColumns[OrderID]"
+                      lineageId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].Columns[order_id]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">4</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Inputs[Slowly Changing Dimension Input].Columns[ProductKey]"
+                      cachedDataType="i4"
+                      cachedName="ProductKey"
+                      externalMetadataColumnId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Inputs[Slowly Changing Dimension Input].ExternalColumns[ProductKey]"
+                      lineageId="Package\Mart-FactSales Loading\LUP-Lookup ProductKey from ProductID.Outputs[Lookup Match Output].Columns[ProductKey]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Inputs[Slowly Changing Dimension Input].Columns[order_qty]"
+                      cachedDataType="i4"
+                      cachedName="order_qty"
+                      externalMetadataColumnId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Inputs[Slowly Changing Dimension Input].ExternalColumns[Quantity]"
+                      lineageId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].Columns[order_qty]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Inputs[Slowly Changing Dimension Input].Columns[sourcetype]"
+                      cachedDataType="wstr"
+                      cachedLength="9"
+                      cachedName="sourcetype"
+                      externalMetadataColumnId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Inputs[Slowly Changing Dimension Input].ExternalColumns[SourceType]"
+                      lineageId="Package\Mart-FactSales Loading\DC-sourcetype,Facts.Outputs[Derived Column Output].Columns[sourcetype]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">4</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Inputs[Slowly Changing Dimension Input].Columns[product_retail_price]"
+                      cachedDataType="cy"
+                      cachedName="product_retail_price"
+                      externalMetadataColumnId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Inputs[Slowly Changing Dimension Input].ExternalColumns[UnitPrice]"
+                      lineageId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].Columns[product_retail_price]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Inputs[Slowly Changing Dimension Input].ExternalColumns[CustomerKey]"
+                      dataType="i4"
+                      name="CustomerKey" />
+                    <externalMetadataColumn
+                      refId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Inputs[Slowly Changing Dimension Input].ExternalColumns[ExtendedPriceAmount]"
+                      dataType="cy"
+                      name="ExtendedPriceAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Inputs[Slowly Changing Dimension Input].ExternalColumns[OrderDateKey]"
+                      dataType="i4"
+                      name="OrderDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Inputs[Slowly Changing Dimension Input].ExternalColumns[OrderID]"
+                      dataType="i4"
+                      name="OrderID" />
+                    <externalMetadataColumn
+                      refId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Inputs[Slowly Changing Dimension Input].ExternalColumns[ProductKey]"
+                      dataType="i4"
+                      name="ProductKey" />
+                    <externalMetadataColumn
+                      refId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Inputs[Slowly Changing Dimension Input].ExternalColumns[Quantity]"
+                      dataType="i4"
+                      name="Quantity" />
+                    <externalMetadataColumn
+                      refId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Inputs[Slowly Changing Dimension Input].ExternalColumns[SourceType]"
+                      dataType="wstr"
+                      length="10"
+                      name="SourceType" />
+                    <externalMetadataColumn
+                      refId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Inputs[Slowly Changing Dimension Input].ExternalColumns[UnitPrice]"
+                      dataType="cy"
+                      name="UnitPrice" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Outputs[Unchanged Output]"
+                  description="Unchanged rows"
+                  exclusionGroup="1"
+                  name="Unchanged Output"
+                  synchronousInputId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Outputs[New Output]"
+                  description="New rows"
+                  exclusionGroup="1"
+                  name="New Output"
+                  synchronousInputId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Outputs[Fixed Attribute Output]"
+                  description="Rows with changes in columns tagged FixedAttribute"
+                  exclusionGroup="1"
+                  name="Fixed Attribute Output"
+                  synchronousInputId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Outputs[Changing Attribute Updates Output]"
+                  description="These rows contain new information for ChangingAttribute (Type 1) column changes"
+                  exclusionGroup="1"
+                  name="Changing Attribute Updates Output"
+                  synchronousInputId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Outputs[Historical Attribute Inserts Output]"
+                  description="HistoricalAttribute (Type 2) changes result in these new rows"
+                  exclusionGroup="2"
+                  name="Historical Attribute Inserts Output"
+                  synchronousInputId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Outputs[Inferred Member Updates Output]"
+                  description="Information to update unpopulated initial dimension row"
+                  exclusionGroup="1"
+                  name="Inferred Member Updates Output"
+                  synchronousInputId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Mart-FactSales Loading\SRC-Mart Sales"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="SRC-Mart Sales"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[stgFudgeMartSales]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Mart-FactSales Loading\SRC-Mart Sales.Connections[OleDbConnection]"
+                  connectionManagerID="{C037AA01-4853-485D-8E19-701D621C87DB}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[ist-cs-dw1.ad.syr.edu.ist722_hhkhan_cc2_stage]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].Columns[order_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].ExternalColumns[order_id]"
+                      lineageId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].Columns[order_id]"
+                      name="order_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].Columns[product_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].ExternalColumns[product_id]"
+                      lineageId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].Columns[product_id]"
+                      name="product_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].Columns[order_qty]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].ExternalColumns[order_qty]"
+                      lineageId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].Columns[order_qty]"
+                      name="order_qty"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].Columns[customer_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].ExternalColumns[customer_id]"
+                      lineageId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].Columns[customer_id]"
+                      name="customer_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].Columns[order_date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].ExternalColumns[order_date]"
+                      lineageId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].Columns[order_date]"
+                      name="order_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].Columns[product_retail_price]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].ExternalColumns[product_retail_price]"
+                      lineageId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].Columns[product_retail_price]"
+                      name="product_retail_price"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].ExternalColumns[order_id]"
+                      dataType="i4"
+                      name="order_id" />
+                    <externalMetadataColumn
+                      refId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].ExternalColumns[product_id]"
+                      dataType="i4"
+                      name="product_id" />
+                    <externalMetadataColumn
+                      refId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].ExternalColumns[order_qty]"
+                      dataType="i4"
+                      name="order_qty" />
+                    <externalMetadataColumn
+                      refId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].ExternalColumns[customer_id]"
+                      dataType="i4"
+                      name="customer_id" />
+                    <externalMetadataColumn
+                      refId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].ExternalColumns[order_date]"
+                      dataType="dbTimeStamp"
+                      name="order_date" />
+                    <externalMetadataColumn
+                      refId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output].ExternalColumns[product_retail_price]"
+                      dataType="cy"
+                      name="product_retail_price" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Error Output].Columns[order_id]"
+                      dataType="i4"
+                      lineageId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Error Output].Columns[order_id]"
+                      name="order_id" />
+                    <outputColumn
+                      refId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Error Output].Columns[product_id]"
+                      dataType="i4"
+                      lineageId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Error Output].Columns[product_id]"
+                      name="product_id" />
+                    <outputColumn
+                      refId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Error Output].Columns[order_qty]"
+                      dataType="i4"
+                      lineageId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Error Output].Columns[order_qty]"
+                      name="order_qty" />
+                    <outputColumn
+                      refId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Error Output].Columns[customer_id]"
+                      dataType="i4"
+                      lineageId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Error Output].Columns[customer_id]"
+                      name="customer_id" />
+                    <outputColumn
+                      refId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Error Output].Columns[order_date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Error Output].Columns[order_date]"
+                      name="order_date" />
+                    <outputColumn
+                      refId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Error Output].Columns[product_retail_price]"
+                      dataType="cy"
+                      lineageId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Error Output].Columns[product_retail_price]"
+                      name="product_retail_price" />
+                    <outputColumn
+                      refId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Mart-FactSales Loading.Paths[Changing Attribute Updates Output]"
+              endId="Package\Mart-FactSales Loading\OLE DB Command.Inputs[OLE DB Command Input]"
+              name="Changing Attribute Updates Output"
+              startId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Outputs[Changing Attribute Updates Output]" />
+            <path
+              refId="Package\Mart-FactSales Loading.Paths[Derived Column Output]"
+              endId="Package\Mart-FactSales Loading\LUP-Lookup DateKey from OrderDate.Inputs[Lookup Input]"
+              name="Derived Column Output"
+              startId="Package\Mart-FactSales Loading\DC-sourcetype,Facts.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Mart-FactSales Loading.Paths[Lookup Match Output]"
+              endId="Package\Mart-FactSales Loading\Lookup CustomerKey from CustomerID.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Mart-FactSales Loading\LUP-Lookup DateKey from OrderDate.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Mart-FactSales Loading.Paths[Lookup Match Output1]"
+              endId="Package\Mart-FactSales Loading\LUP-Lookup ProductKey from ProductID.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Mart-FactSales Loading\Lookup CustomerKey from CustomerID.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Mart-FactSales Loading.Paths[Lookup Match Output2]"
+              endId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Inputs[Slowly Changing Dimension Input]"
+              name="Lookup Match Output"
+              startId="Package\Mart-FactSales Loading\LUP-Lookup ProductKey from ProductID.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Mart-FactSales Loading.Paths[New Output]"
+              endId="Package\Mart-FactSales Loading\Insert Destination.Inputs[OLE DB Destination Input]"
+              name="New Output"
+              startId="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales.Outputs[New Output]" />
+            <path
+              refId="Package\Mart-FactSales Loading.Paths[OLE DB Source Output]"
+              endId="Package\Mart-FactSales Loading\DC-sourcetype,Facts.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\Mart-FactSales Loading\SRC-Mart Sales.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="198,50"
+          Id="Package\Mart-FactSales Loading"
+          TopLeft="216,63" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Mart-FactSales Loading">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Mart-FactSales Loading\Insert Destination"
+          TopLeft="50.5000000000001,405.5" />
+        <NodeLayout
+          Size="263,42"
+          Id="Package\Mart-FactSales Loading\Lookup CustomerKey from CustomerID"
+          TopLeft="413.5,143.5" />
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Mart-FactSales Loading\SRC-Mart Sales"
+          TopLeft="240.5,5.5" />
+        <NodeLayout
+          Size="166,42"
+          Id="Package\Mart-FactSales Loading\OLE DB Command"
+          TopLeft="408,392.5" />
+        <NodeLayout
+          Size="255,42"
+          Id="Package\Mart-FactSales Loading\LUP-Lookup DateKey from OrderDate"
+          TopLeft="118.5,105.5" />
+        <NodeLayout
+          Size="230,49"
+          Id="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales"
+          TopLeft="185,298.5" />
+        <NodeLayout
+          Size="175,42"
+          Id="Package\Mart-FactSales Loading\DC-sourcetype,Facts"
+          TopLeft="403.5,60.5" />
+        <NodeLayout
+          Size="267,42"
+          Id="Package\Mart-FactSales Loading\LUP-Lookup ProductKey from ProductID"
+          TopLeft="124.5,210.5" />
+        <EdgeLayout
+          Id="Package\Mart-FactSales Loading.Paths[Lookup Match Output2]"
+          TopLeft="258,252.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="42,46"
+              Start="0,0"
+              End="42,38.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19"
+                    Point2="0,23"
+                    Point3="4,23" />
+                  <mssgle:LineSegment
+                    End="38,23" />
+                  <mssgle:CubicBezierSegment
+                    Point1="38,23"
+                    Point2="42,23"
+                    Point3="42,27" />
+                  <mssgle:LineSegment
+                    End="42,38.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-27.19138671875,28,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Mart-FactSales Loading.Paths[Lookup Match Output1]"
+          TopLeft="545,185.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-287,25"
+              Start="0,0"
+              End="-287,17.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,8.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,8.5"
+                    Point2="0,12.5"
+                    Point3="-4,12.5" />
+                  <mssgle:LineSegment
+                    End="-283,12.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-283,12.5"
+                    Point2="-287,12.5"
+                    Point3="-287,16.5" />
+                  <mssgle:LineSegment
+                    End="-287,17.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-200.5600390625,17.5,114.120078125,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Mart-FactSales Loading.Paths[Lookup Match Output]"
+          TopLeft="373.5,132.166666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="40,32.3333333333333"
+              Start="0,0"
+              End="32.5,32.3333333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="12.8807339449541,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="12.8807339449541,0"
+                    Point2="16.8807339449541,0"
+                    Point3="16.8807339449541,4" />
+                  <mssgle:LineSegment
+                    End="16.8807339449541,28.3333333333333" />
+                  <mssgle:CubicBezierSegment
+                    Point1="16.8807339449541,28.3333333333333"
+                    Point2="16.8807339449541,32.3333333333333"
+                    Point3="20.8807339449541,32.3333333333333" />
+                  <mssgle:LineSegment
+                    End="32.5,32.3333333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-31.3106527737959,-17.609375,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Mart-FactSales Loading.Paths[Derived Column Output]"
+          TopLeft="403.5,81.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-30,45"
+              Start="0,0"
+              End="-22.5,45">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-11,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-11,0"
+                    Point2="-15,0"
+                    Point3="-15,4" />
+                  <mssgle:LineSegment
+                    End="-15,41" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-15,41"
+                    Point2="-15,45"
+                    Point3="-19,45" />
+                  <mssgle:LineSegment
+                    End="-22.5,45" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Mart-FactSales Loading.Paths[Changing Attribute Updates Output]"
+          TopLeft="337,347.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="154,45"
+              Start="0,0"
+              End="154,37.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.1865284974093" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.1865284974093"
+                    Point2="0,18.1865284974093"
+                    Point3="4,18.1865284974093" />
+                  <mssgle:LineSegment
+                    End="150,18.1865284974093" />
+                  <mssgle:CubicBezierSegment
+                    Point1="150,18.1865284974093"
+                    Point2="154,18.1865284974093"
+                    Point3="154,22.1865284974093" />
+                  <mssgle:LineSegment
+                    End="154,37.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-1.53390625000003,23.1865284974093,157.0678125,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Mart-FactSales Loading.Paths[OLE DB Source Output]"
+          TopLeft="391.5,26.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="99.5,34"
+              Start="0,0"
+              End="99.5,26.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="95.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="95.5,0"
+                    Point2="99.5,0"
+                    Point3="99.5,4" />
+                  <mssgle:LineSegment
+                    End="99.5,26.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Mart-FactSales Loading.Paths[New Output]"
+          TopLeft="263,347.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-131,58"
+              Start="0,0"
+              End="-131,50.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.440414507772" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.440414507772"
+                    Point2="0,23.440414507772"
+                    Point3="-4,23.440414507772" />
+                  <mssgle:LineSegment
+                    End="-127,23.440414507772" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-127,23.440414507772"
+                    Point2="-131,23.440414507772"
+                    Point3="-131,27.440414507772" />
+                  <mssgle:LineSegment
+                    End="-131,50.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-92.5913867187499,28.440414507772,54.1827734375,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Mart-FactSales Loading\Lookup CustomerKey from CustomerID">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[fudgemartg2].[DimCustomer]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Mart-FactSales Loading\SRC-Mart Sales">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Mart-FactSales Loading\LUP-Lookup DateKey from OrderDate">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[fudgemartg2].[DimDate]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Mart-FactSales Loading\SCD-Smart Update Fact Sales">
+    <Properties>
+      <Property>
+        <Name>SCDMetadata</Name>
+        <Value
+          type="q2:string">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SCDWizardMetadata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionID&gt;{4B92BB3A-BDDC-4036-B4CE-A93425511B88}&lt;/ConnectionID&gt;
+  &lt;TableName&gt;[fudgemartg2].[FactSales]&lt;/TableName&gt;
+  &lt;InputToColumnsCollection&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Lookup CustomerKey from CustomerID.Outputs[Lookup Match Output].Columns[CustomerKey]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;CustomerKey&lt;/ColumnName&gt;
+      &lt;KeyType&gt;BusinessKey&lt;/KeyType&gt;
+      &lt;ChangeType&gt;None&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;DC-Source.Outputs[Derived Column Output].Columns[Extended_Price]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;ExtendedPriceAmount&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;LUP-Lookup DateKey from OrderDate.Outputs[Lookup Match Output].Columns[DateKey]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;OrderDateKey&lt;/ColumnName&gt;
+      &lt;KeyType&gt;BusinessKey&lt;/KeyType&gt;
+      &lt;ChangeType&gt;None&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;SRC-Mart Sales.Outputs[OLE DB Source Output].Columns[order_id]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;OrderID&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;FixedAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;LUP-Lookup ProductKey from ProductID.Outputs[Lookup Match Output].Columns[ProductKey]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;ProductKey&lt;/ColumnName&gt;
+      &lt;KeyType&gt;BusinessKey&lt;/KeyType&gt;
+      &lt;ChangeType&gt;None&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;SRC-Mart Sales.Outputs[OLE DB Source Output].Columns[order_qty]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;Quantity&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;DC-Source.Outputs[Derived Column Output].Columns[sourcetype]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;SourceType&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;FixedAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;SRC-Mart Sales.Outputs[OLE DB Source Output].Columns[product_retail_price]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;UnitPrice&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+  &lt;/InputToColumnsCollection&gt;
+  &lt;GeneratedComponentsIdentificationStrings&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Insert Destination&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;OLE DB Command&lt;/anyType&gt;
+  &lt;/GeneratedComponentsIdentificationStrings&gt;
+  &lt;FailFixedAttribute&gt;false&lt;/FailFixedAttribute&gt;
+  &lt;FailChangeAttribute&gt;false&lt;/FailChangeAttribute&gt;
+  &lt;UseStartEndDate&gt;false&lt;/UseStartEndDate&gt;
+  &lt;CurrentIndicatorColumn /&gt;
+  &lt;InferredIndicatorColumn /&gt;
+  &lt;ValueCurrent /&gt;
+  &lt;ValueExpired /&gt;
+  &lt;StartDateColumn /&gt;
+  &lt;EndDateColumn /&gt;
+  &lt;DateVariable /&gt;
+  &lt;EnableInferredSupport&gt;false&lt;/EnableInferredSupport&gt;
+&lt;/SCDWizardMetadata&gt;</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Mart-FactSales Loading\LUP-Lookup ProductKey from ProductID">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[fudgemartg2].[DimProduct]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

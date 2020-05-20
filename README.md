@@ -21,6 +21,6 @@ specifications based on the Kimball technical architecture
 6)Performed Multidimensional data analysis by craeting MOLAP cubes.
 Using ROLAP would require querying data from multiple tables. 
 On the contrary, MOLAP has all possible combinations of data already stored in a multidimensional array. 
-MOLAP can access this data directly. Hence, MOLAP is faster compared to Relational Online Analytical Processing (ROLAP). 
+MOLAP can access this data directly. Hence, MOLAP is faster compared to Relational Online Analytical Processing (ROLAP)
 
 7) Made Visualizations on Power-BI after brainstorming with teammates to make recommendations on how Fudge Corporation can increase its sales   

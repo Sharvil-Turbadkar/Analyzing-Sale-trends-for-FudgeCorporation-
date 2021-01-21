@@ -26,11 +26,19 @@ specifications
 
 ## Recommendations:
 1)Fudge Corporation needs to bank more on FudeFlix as it is a promising powerhouse for increasing revenue 
+
 2)Extensive PR Campaigns in midwestern and southeastern states like Texas, Arkansas, Iowa
+
 3)Market Clothing only in areas where it is a luxury like California
+
 4)Provide holiday season offers on the top 10 most selling items as December and January have the highest sales across the year  
-5)For FudgeFlix, Increase advertising for premium on west and central region and save costs in servers by temporarily using less powerful/number of servers in the western region 6)as it just needs to handle basic plan streaming   
-7)Based on product department, focus on improving sales in Housewares and clothes department, while maintaining sales in electronics and hardware.
-8)A few customers generate most of the revenue for FudgeMart, so focus on striking deals or contracts with these customers.
+
+5)For FudgeFlix, Increase advertising for premium on west and central region and save costs in servers by temporarily using less powerful/number of servers in the western region 
+
+as it just needs to handle basic plan streaming   
+
+6)Based on product department, focus on improving sales in Housewares and clothes department, while maintaining sales in electronics and hardware.
+
+7)A few customers generate most of the revenue for FudgeMart, so focus on striking deals or contracts with these customers.
 
 

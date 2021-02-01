@@ -11,7 +11,7 @@ Tools and Technologies: T-SQL, SSIS, SSRS, SSAS, SQL Server, Power BI, Git, GitH
 ## Process :
 1)Data profiling to understand the business requirements of the Stakeholders
 
-2) High-Level Dimensional Modelling was done to turn functional business requirements into the dimensional data warehouse (DDS)
+2)High-Level Dimensional Modelling was done to turn functional business requirements into the dimensional data warehouse (DDS)
 specifications 
 
 3)Detailed Level Dimensional Modelling was done to create a formal table design for our FudgeFlix and FudgeMart DDS

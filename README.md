@@ -9,8 +9,8 @@ Make Business Recommendations to higher authorities for boosting Sales in the co
 Tools and Technologies: T-SQL, SSIS, SSRS, SSAS, SQL Server, Power BI, Git, GitHub
 
 ## Process :
-Profile Data 
 1)Data profiling to understand the business requirements of the Stakeholders
+
 2) High-Level Dimensional Modelling was done to turn functional business requirements into the dimensional data warehouse (DDS)
 specifications 
 
